@@ -6,6 +6,7 @@ local width, height = 0, 0
 local centerX, centerY = 0, 0
 local fractalLoop = 1
 local handLength = {["s"] = 100, ["m"] = 75, ["h"] = 50}
+local use24 = false
 
 function valueToCoords( myCenterX, myCenterY, value, scale, hourType )
     -- convert to rad ( based on 1-60 )
@@ -44,7 +45,7 @@ function love.draw()
             cX = centers[i]
             cY = centers[i+1]
             --print( cX, cY, #centers )
-            for _,v in ipairs({drawClock( cX, cY, second*(i-1) )}) do
+            for _,v in ipairs({drawClock( cX, cY, second*lcv )}) do
                 table.insert( newCenters, v )
                 --print(i,v,second)
             end
@@ -56,7 +57,7 @@ end
 function drawClock( centerX, centerY, rotation )  -- seconds (1/60)
     secondCoords = {valueToCoords( centerX, centerY, second+rotation, handLength.s )}
     minuteCoords = {valueToCoords( centerX, centerY, minute+rotation, handLength.m )}
-    hourCoords = {valueToCoords( centerX, centerY, hour+(rotation/5), handLength.h, 12 )}
+    hourCoords = {valueToCoords( centerX, centerY, hour+(rotation/5), handLength.h, use24 and 24 or 12 )}
 
     love.graphics.line( secondCoords )
     love.graphics.line( minuteCoords )
