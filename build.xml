@@ -127,14 +127,4 @@
 			</condition>
 		</fail>
 	</target>
-
-	<target name="curse" depends="package">
-		<property name="curse.dir" location="${ant.project.name}-cf"/>
-		<copy todir="${curse.dir}">
-			<fileset dir="${package.dir}"/>
-		</copy>
-		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
-			<arg line="status" />
-		</exec>
-	</target>
 </project>
