@@ -35,6 +35,10 @@ function love.update( dt )
     hour = now.hour + minute/60
 end
 
+function love.resize()
+    love.load()
+end
+
 function love.draw()
     love.graphics.print( string.format( "%i:%i.%i", hour, minute, second ), 10, 10 )
     love.graphics.circle( 'line', centerX, centerY, handLength.s )
